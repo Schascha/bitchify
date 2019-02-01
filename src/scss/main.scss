@@ -1,0 +1,113 @@
+$base-color: #1d1d1d;
+$bitchify-color: #c00;
+$color-white: #fff;
+$color-black: #000;
+
+/* ------------------------------------
+   BASE
+   ------------------------------------ */
+
+html {
+    box-sizing: border-box;
+}
+
+* {
+    border: 0;
+    margin: 0;
+    outline: 0;
+    padding: 0;
+
+    &,
+    &::before,
+    &::after {
+        box-sizing: inherit;
+    }
+}
+
+html {
+    color: $base-color;
+    font-family: 'Lora', serif;
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+/* ------------------------------------
+   TYPOGRAPHY
+   ------------------------------------ */
+
+h1 {
+    font-size: 2em;
+
+    &::after {
+        background-color: currentColor;
+        content: '';
+        display: block;
+        height: 1px;
+        margin: 1em 0;
+        width: 3em;
+    }
+}
+
+h2 {
+    font-size: 1.5em;
+    margin: 1em 0;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+/* ------------------------------------
+   LAYOUT
+   ------------------------------------ */
+
+.head {
+    box-shadow: 0 1px 2px rgba($color-black, .1);
+    text-align: center;
+}
+
+.container {
+    margin: 0 auto;
+    max-width: 45em;
+    padding: 3em 1.5em;
+}
+
+.align-center {
+    text-align: center;
+}
+
+.button {
+    background: $bitchify-color;
+    border: 0;
+    border-radius: 3px;
+    color: $color-white;
+    cursor: pointer;
+    display: inline-block;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: bold;
+    line-height: 2.5;
+    padding: 0 2em;
+    text-align: center;
+    text-decoration: none;
+    transition: all .2s;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &:hover {
+        background: lighten($base-color, 20%);
+    }
+
+    &:active {
+        transform: scale(.95);
+    }
+
+    &:disabled {
+        background: lighten($base-color, 60%);
+        cursor: default;
+    }
+}
+
+.bitchify {
+    color: $bitchify-color;
+}
