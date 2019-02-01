@@ -45,11 +45,13 @@
         </p>
     </div>
 
-    <script src="../dist/js/bitchify.min.js"></script>
+    <script src="dist/js/bitchify.min.js"></script>
     <script>
-        var bitchify = new Bitchify({
-            replace: '<span class="bitchify">, Bitch!</span>'
-        });
+        var
+            bitchify = new Bitchify({
+                replace: '<span class="bitchify">, Bitch!</span>'
+            })
+        ;
 
         document.getElementById('bitchify').addEventListener('click', function(event) {
             event.preventDefault();

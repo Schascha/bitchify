@@ -18,7 +18,8 @@
     "postinstall": "npm run build"
   },
   "keywords": [
-    "javascript"
+    "javascript",
+    "es6"
   ],
   "author": "Sascha Künstler <contact.schascha@gmail.com> (http://www.schaschaweb.de)",
   "license": "MIT",
