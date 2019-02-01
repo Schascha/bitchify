@@ -64,16 +64,25 @@ p {
 .head {
 	box-shadow: 0 1px 2px rgba($color-black, .1);
 	text-align: center;
+
+	p {
+		font-size: .75rem;
+		margin: 1rem 0;
+	}
+
+	span {
+		background-color: #eee;
+		border-radius: 3px;
+		display: inline-block;
+		margin: 0 2px;
+		width: 2em;
+	}
 }
 
 .container {
 	margin: 0 auto;
 	max-width: 45em;
 	padding: 3em 1.5em;
-}
-
-.align-center {
-	text-align: center;
 }
 
 .button {

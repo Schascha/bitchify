@@ -4,10 +4,10 @@ var defaults = {
 	elements: 'h1, h2, h3, h4, h5, h6, p',
 	pattern: /[\t\n.!?]+$/,
 	replace: ', Bitch!',
-	before: false,
 	active: false,
 	hash: 'bitch',
-	keyword: 'bitch'
+	keyword: 'bitch',
+	onKeypress: function() {}
 };
 
 class Bitchify {
@@ -24,11 +24,12 @@ class Bitchify {
 	 */
 	constructor(options) {
 		this.options = Object.assign({}, defaults, options);
+		this.active = this.options.active;
 
-		if (this.options.active || this._isHash()) {
+		if (this.active || this._isHash()) {
 			this.render();
 		} else {
-			this._keyPress();
+			this._addKeyPress();
 		}
 	}
 
@@ -36,7 +37,13 @@ class Bitchify {
 	 * Replace pattern with string on all elements
 	 */
 	render() {
-		let matches = document.querySelectorAll(this.options.elements);
+		if (this.active) {
+			return;
+		}
+
+		this.active = true;
+
+		const matches = document.querySelectorAll(this.options.elements);
 
 		for (let value of matches) {
 			value.innerHTML = this._replace(value.innerHTML);
@@ -82,7 +89,7 @@ class Bitchify {
 	 *
 	 * @private
 	 */
-	_keyPress() {
+	_addKeyPress() {
 		if (this.options.keyword) {
 			this.keylog = [];
 			this.keyword = this.options.keyword;
@@ -100,6 +107,15 @@ class Bitchify {
 	_onKeyPress(event) {
 		if (this._validateKey(event.key)) {
 			this.render();
+
+			// Callback
+			if (this.options.onKeypress && typeof this.options.onKeypress === 'function') {
+				this.options.onKeypress();
+			}
+		}
+
+		// Remove keypress event
+		if (this.active) {
 			document.removeEventListener('keypress', this._onKeyPress);
 		}
 	}

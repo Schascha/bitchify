@@ -1,4 +1,4 @@
-# bitchify
+# Bitchify
 
 Bitchify your panty pants
 
