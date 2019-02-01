@@ -6,8 +6,7 @@ var defaults = {
 	replace: ', Bitch!',
 	active: false,
 	hash: 'bitch',
-	keyword: 'bitch',
-	onKeypress: function() {}
+	keyword: 'bitch'
 };
 
 class Bitchify {
@@ -21,10 +20,15 @@ class Bitchify {
 	 * @param {boolean} options.active
 	 * @param {string} options.hash
 	 * @param {string} options.keyword
+	 * @param {function} options.onBitchify
 	 */
-	constructor(options) {
+	constructor(options, callback) {
 		this.options = Object.assign({}, defaults, options);
 		this.active = this.options.active;
+
+		if (callback && typeof callback === 'function') {
+			this.callback = callback;
+		}
 
 		if (this.active || this._isHash()) {
 			this.render();
@@ -47,6 +51,11 @@ class Bitchify {
 
 		for (let value of matches) {
 			value.innerHTML = this._replace(value.innerHTML);
+		}
+
+		// Callback
+		if (this.callback) {
+			this.callback();
 		}
 	}
 
@@ -93,8 +102,8 @@ class Bitchify {
 		if (this.options.keyword) {
 			this.keylog = [];
 			this.keyword = this.options.keyword;
-			this._onKeyPress = this._onKeyPress.bind(this);
-			document.addEventListener('keypress', this._onKeyPress);
+			this._onBitchify = this._onBitchify.bind(this);
+			document.addEventListener('keypress', this._onBitchify);
 		}
 	}
 
@@ -104,19 +113,14 @@ class Bitchify {
 	 * @param {object} event
 	 * @private
 	 */
-	_onKeyPress(event) {
+	_onBitchify(event) {
 		if (this._validateKey(event.key)) {
 			this.render();
-
-			// Callback
-			if (this.options.onKeypress && typeof this.options.onKeypress === 'function') {
-				this.options.onKeypress();
-			}
 		}
 
 		// Remove keypress event
 		if (this.active) {
-			document.removeEventListener('keypress', this._onKeyPress);
+			document.removeEventListener('keypress', this._onBitchify);
 		}
 	}
 

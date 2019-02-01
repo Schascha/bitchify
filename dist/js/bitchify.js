@@ -12,8 +12,7 @@ var defaults = {
 	replace: ', Bitch!',
 	active: false,
 	hash: 'bitch',
-	keyword: 'bitch',
-	onKeypress: function onKeypress() {}
+	keyword: 'bitch'
 };
 
 var Bitchify = function () {
@@ -27,12 +26,17 @@ var Bitchify = function () {
   * @param {boolean} options.active
   * @param {string} options.hash
   * @param {string} options.keyword
+  * @param {function} options.onBitchify
   */
-	function Bitchify(options) {
+	function Bitchify(options, callback) {
 		_classCallCheck(this, Bitchify);
 
 		this.options = Object.assign({}, defaults, options);
 		this.active = this.options.active;
+
+		if (callback && typeof callback === 'function') {
+			this.callback = callback;
+		}
 
 		if (this.active || this._isHash()) {
 			this.render();
@@ -67,6 +71,8 @@ var Bitchify = function () {
 
 					value.innerHTML = this._replace(value.innerHTML);
 				}
+
+				// Callback
 			} catch (err) {
 				_didIteratorError = true;
 				_iteratorError = err;
@@ -80,6 +86,10 @@ var Bitchify = function () {
 						throw _iteratorError;
 					}
 				}
+			}
+
+			if (this.callback) {
+				this.callback();
 			}
 		}
 
@@ -138,8 +148,8 @@ var Bitchify = function () {
 			if (this.options.keyword) {
 				this.keylog = [];
 				this.keyword = this.options.keyword;
-				this._onKeyPress = this._onKeyPress.bind(this);
-				document.addEventListener('keypress', this._onKeyPress);
+				this._onBitchify = this._onBitchify.bind(this);
+				document.addEventListener('keypress', this._onBitchify);
 			}
 		}
 
@@ -151,20 +161,15 @@ var Bitchify = function () {
    */
 
 	}, {
-		key: '_onKeyPress',
-		value: function _onKeyPress(event) {
+		key: '_onBitchify',
+		value: function _onBitchify(event) {
 			if (this._validateKey(event.key)) {
 				this.render();
-
-				// Callback
-				if (this.options.onKeypress && typeof this.options.onKeypress === 'function') {
-					this.options.onKeypress();
-				}
 			}
 
 			// Remove keypress event
 			if (this.active) {
-				document.removeEventListener('keypress', this._onKeyPress);
+				document.removeEventListener('keypress', this._onBitchify);
 			}
 		}
 

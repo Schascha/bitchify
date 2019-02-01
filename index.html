@@ -4,6 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Bitchify</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lora:400,700">
 	<link rel="stylesheet" href="dist/css/main.css">
 </head>
@@ -50,16 +51,15 @@
 		</div>
 	</main>
 
-	<script src="dist/js/bitchify.min.js"></script>
+	<script src="dist/js/bitchify.js"></script>
 	<script>
 		var
 			bitchify = new Bitchify({
 				elements: 'main h1, main h2, main p',
-				replace: '<span class="bitchify">, Bitch!</span>',
-				onKeypress: function() {
-					document.getElementById('bitchify').setAttribute('disabled', 'disabled');
-				}
-			})
+				replace: '<span class="bitchify">, Bitch!</span>'
+			}, function() {
+				document.getElementById('bitchify').setAttribute('disabled', 'disabled');
+			});
 		;
 
 		document.getElementById('bitchify').addEventListener('click', function(event) {
