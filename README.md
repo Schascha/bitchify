@@ -2,16 +2,16 @@
 
 Bitchify your panty pants
 
+https://schascha.github.io/bitchify/
+
 ## Initialize
 
 ```html
-	<script src="dist/js/bitchify.min.js"></script>
+<script src="dist/js/bitchify.min.js"></script>
 ```
 
 ```javascript
-var
-	bitchify = new Bitchify()
-;
+var bitchify = new Bitchify();
 ```
 
 ## Configuration
