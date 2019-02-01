@@ -2,7 +2,7 @@
 
 var defaults = {
 	elements: 'h1, h2, h3, h4, h5, h6, p',
-	pattern: /[\t\n\.\!\?]+$/,
+	pattern: /[\t\n.!?]+$/,
 	replace: ', Bitch!',
 	before: false,
 	active: false,
@@ -13,7 +13,6 @@ var defaults = {
 class Bitchify {
 
 	/**
-	 *
 	 * @param {object} options
 	 * @param {string} options.elements
 	 * @param {RegExp|string} options.pattern
