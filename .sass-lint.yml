@@ -1,3 +1,5 @@
+# https://github.com/sasstools/sass-lint/tree/master/docs/rules
+
 files:
   include: '**/*.s+(a|c)ss'
 options:
@@ -5,9 +7,6 @@ options:
   merge-default-rules: false
 rules:
   border-zero: 1
-  brace-style:
-    - 1
-    - allow-single-line: false
   class-name-format:
     - 1
     - convention: hyphenatedbem
@@ -15,6 +14,9 @@ rules:
     - 1
     - filename-extension: false
       leading-underscore: false
+  empty-args:
+    - 2
+    - include: true
   empty-line-between-blocks:
     - 1
     - ignore-single-line-rulesets: false
@@ -40,8 +42,8 @@ rules:
     - 1
     - convention: hyphenatedbem
   indentation:
-    - 1
-    - size: 4
+    - 0
+    - size: 2
   leading-zero:
     - 1
     - include: false

@@ -7,7 +7,7 @@
   "scripts": {
     "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
     "scss": "node-sass --output-style compressed -o dist/css src/scss",
-	"sass-lint": "sass-lint \"src/scss/**/*.scss\" -v -q",
+    "sass-lint": "sass-lint \"src/scss/**/*.scss\" -v -q",
     "lint": "jshint src/js/*.js",
     "uglify": "uglifyjs dist/js/bitchify.js -m -o dist/js/bitchify.min.js",
     "build": "parallelshell \"npm run build:css\" \"npm run build:js\"",
