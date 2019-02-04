@@ -7,32 +7,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 /*exported Bitchify*/
 
 var defaults = {
-	elements: 'h1, h2, h3, h4, h5, h6, p',
-	pattern: /[\t\n.!?]+$/,
-	replace: ', Bitch!',
-	active: false,
-	hash: 'bitch',
-	keyword: 'bitch'
+	elements: 'h1, h2, h3, h4, h5, h6, p', // String: Selector
+	pattern: /[\t\n.!?]+$/, // RegExp|String: Replace pattern
+	replace: ', Bitch!', // String: Replace result
+	before: false, // Boolean: Replace before or after
+	active: false, // Boolean: Render on page load
+	hash: 'bitch', // String: Trigger bitchify via hashtag
+	keyword: 'bitch' // String: Trigger bitchify on keypress
 };
 
 var Bitchify = function () {
 
 	/**
   * @param {object} options
-  * @param {string} options.elements
-  * @param {RegExp|string} options.pattern
-  * @param {string} options.replace
-  * @param {boolean} options.before
-  * @param {boolean} options.active
-  * @param {string} options.hash
-  * @param {string} options.keyword
-  * @param {function} options.onBitchify
   */
 	function Bitchify(options, callback) {
 		_classCallCheck(this, Bitchify);
 
 		this.options = Object.assign({}, defaults, options);
-		this.active = this.options.active;
+		this.active = this.options.active || false;
 
 		if (callback && typeof callback === 'function') {
 			this.callback = callback;
@@ -41,7 +34,8 @@ var Bitchify = function () {
 		if (this.active || this._isHash()) {
 			this.render();
 		} else {
-			this._addKeyPress();
+			this._addKeypress();
+			this._addHashchange();
 		}
 	}
 
@@ -72,7 +66,7 @@ var Bitchify = function () {
 					value.innerHTML = this._replace(value.innerHTML);
 				}
 
-				// Callback
+				// Remove event listener
 			} catch (err) {
 				_didIteratorError = true;
 				_iteratorError = err;
@@ -88,6 +82,10 @@ var Bitchify = function () {
 				}
 			}
 
+			document.removeEventListener('keypress', this._onKeypress);
+			window.removeEventListener('hashchange', this._onHashchange);
+
+			// Callback
 			if (this.callback) {
 				this.callback();
 			}
@@ -95,7 +93,6 @@ var Bitchify = function () {
 
 		/**
    * Returns replace string
-   *
    * @param {string} str
    * @returns {*}
    * @private
@@ -111,7 +108,6 @@ var Bitchify = function () {
 
 		/**
    * Return true if options.hash is equal to window.location.hash
-   *
    * @returns {boolean}
    * @private
    */
@@ -124,8 +120,6 @@ var Bitchify = function () {
 
 		/**
    * Removes hashtag
-   *
-   * @param {string} str
    * @returns {string}
    * @private
    */
@@ -138,44 +132,36 @@ var Bitchify = function () {
 
 		/**
    * Enable keypress event listener
-   *
    * @private
    */
 
 	}, {
-		key: '_addKeyPress',
-		value: function _addKeyPress() {
+		key: '_addKeypress',
+		value: function _addKeypress() {
 			if (this.options.keyword) {
 				this.keylog = [];
 				this.keyword = this.options.keyword;
-				this._onBitchify = this._onBitchify.bind(this);
-				document.addEventListener('keypress', this._onBitchify);
+				this._onKeypress = this._onKeypress.bind(this);
+				document.addEventListener('keypress', this._onKeypress);
 			}
 		}
 
 		/**
-   * Keypress event handler
-   *
-   * @param {object} event
+   * Enabel hashchange event listener
    * @private
    */
 
 	}, {
-		key: '_onBitchify',
-		value: function _onBitchify(event) {
-			if (this._validateKey(event.key)) {
-				this.render();
-			}
-
-			// Remove keypress event
-			if (this.active) {
-				document.removeEventListener('keypress', this._onBitchify);
+		key: '_addHashchange',
+		value: function _addHashchange() {
+			if (this.options.hash) {
+				this._onHashchange = this._onHashchange.bind(this);
+				window.addEventListener('hashchange', this._onHashchange);
 			}
 		}
 
 		/**
    * Returns true if keylog is equal to keyword
-   *
    * @param {string} key
    * @returns {boolean}
    * @private
@@ -191,6 +177,33 @@ var Bitchify = function () {
 			}
 
 			return this.keylog.join('') === this.keyword;
+		}
+
+		/**
+   * Keypress event handler
+   * @param {object} event
+   * @private
+   */
+
+	}, {
+		key: '_onKeypress',
+		value: function _onKeypress(event) {
+			if (this._validateKey(event.key)) {
+				this.render();
+			}
+		}
+
+		/**
+   * Hashchange event handler
+   * @private
+   */
+
+	}, {
+		key: '_onHashchange',
+		value: function _onHashchange() {
+			if (this._isHash()) {
+				this.render();
+			}
 		}
 	}]);
 

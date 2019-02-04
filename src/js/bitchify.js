@@ -1,30 +1,23 @@
 /*exported Bitchify*/
 
 var defaults = {
-	elements: 'h1, h2, h3, h4, h5, h6, p',
-	pattern: /[\t\n.!?]+$/,
-	replace: ', Bitch!',
-	active: false,
-	hash: 'bitch',
-	keyword: 'bitch'
+	elements: 'h1, h2, h3, h4, h5, h6, p',	// String: Selector
+	pattern: /[\t\n.!?]+$/,					// RegExp|String: Replace pattern
+	replace: ', Bitch!',					// String: Replace result
+	before: false,							// Boolean: Replace before or after
+	active: false,							// Boolean: Render on page load
+	hash: 'bitch',							// String: Trigger bitchify via hashtag
+	keyword: 'bitch'						// String: Trigger bitchify on keypress
 };
 
 class Bitchify {
 
 	/**
 	 * @param {object} options
-	 * @param {string} options.elements
-	 * @param {RegExp|string} options.pattern
-	 * @param {string} options.replace
-	 * @param {boolean} options.before
-	 * @param {boolean} options.active
-	 * @param {string} options.hash
-	 * @param {string} options.keyword
-	 * @param {function} options.onBitchify
 	 */
 	constructor(options, callback) {
 		this.options = Object.assign({}, defaults, options);
-		this.active = this.options.active;
+		this.active = this.options.active || false;
 
 		if (callback && typeof callback === 'function') {
 			this.callback = callback;
@@ -33,7 +26,8 @@ class Bitchify {
 		if (this.active || this._isHash()) {
 			this.render();
 		} else {
-			this._addKeyPress();
+			this._addKeypress();
+			this._addHashchange();
 		}
 	}
 
@@ -53,6 +47,10 @@ class Bitchify {
 			value.innerHTML = this._replace(value.innerHTML);
 		}
 
+		// Remove event listener
+		document.removeEventListener('keypress', this._onKeypress);
+		window.removeEventListener('hashchange', this._onHashchange);
+
 		// Callback
 		if (this.callback) {
 			this.callback();
@@ -61,7 +59,6 @@ class Bitchify {
 
 	/**
 	 * Returns replace string
-	 *
 	 * @param {string} str
 	 * @returns {*}
 	 * @private
@@ -74,7 +71,6 @@ class Bitchify {
 
 	/**
 	 * Return true if options.hash is equal to window.location.hash
-	 *
 	 * @returns {boolean}
 	 * @private
 	 */
@@ -84,8 +80,6 @@ class Bitchify {
 
 	/**
 	 * Removes hashtag
-	 *
-	 * @param {string} str
 	 * @returns {string}
 	 * @private
 	 */
@@ -95,38 +89,30 @@ class Bitchify {
 
 	/**
 	 * Enable keypress event listener
-	 *
 	 * @private
 	 */
-	_addKeyPress() {
+	_addKeypress() {
 		if (this.options.keyword) {
 			this.keylog = [];
 			this.keyword = this.options.keyword;
-			this._onBitchify = this._onBitchify.bind(this);
-			document.addEventListener('keypress', this._onBitchify);
+			this._onKeypress = this._onKeypress.bind(this);
+			document.addEventListener('keypress', this._onKeypress);
 		}
 	}
 
 	/**
-	 * Keypress event handler
-	 *
-	 * @param {object} event
+	 * Enabel hashchange event listener
 	 * @private
 	 */
-	_onBitchify(event) {
-		if (this._validateKey(event.key)) {
-			this.render();
-		}
-
-		// Remove keypress event
-		if (this.active) {
-			document.removeEventListener('keypress', this._onBitchify);
+	_addHashchange() {
+		if (this.options.hash) {
+			this._onHashchange = this._onHashchange.bind(this);
+			window.addEventListener('hashchange', this._onHashchange);
 		}
 	}
 
 	/**
 	 * Returns true if keylog is equal to keyword
-	 *
 	 * @param {string} key
 	 * @returns {boolean}
 	 * @private
@@ -140,4 +126,26 @@ class Bitchify {
 
 		return (this.keylog.join('') === this.keyword);
 	}
+
+	/**
+	 * Keypress event handler
+	 * @param {object} event
+	 * @private
+	 */
+	_onKeypress(event) {
+		if (this._validateKey(event.key)) {
+			this.render();
+		}
+	}
+
+	/**
+	 * Hashchange event handler
+	 * @private
+	 */
+	_onHashchange() {
+		if (this._isHash()) {
+			this.render();
+		}
+	}
+
 }
