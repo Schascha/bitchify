@@ -58,14 +58,15 @@
 				elements: 'main h1, main h2, main p',
 				replace: '<span class="bitchify">, Bitch!</span>'
 			}, function() {
-				document.getElementById('bitchify').setAttribute('disabled', 'disabled');
+				// Disable button
+				document.getElementById('bitchify').disabled = true;
 			});
 		;
 
+		// Button click event listener
 		document.getElementById('bitchify').addEventListener('click', function(event) {
 			event.preventDefault();
 			bitchify.render();
-			this.setAttribute('disabled', 'disabled');
 		});
 	</script>
 </body>

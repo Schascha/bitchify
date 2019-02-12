@@ -1,10 +1,8 @@
-/*exported Bitchify*/
-
 var defaults = {
 	elements: 'h1, h2, h3, h4, h5, h6, p',	// String: Selector
-	pattern: /[\t\n.!?]+$/,					// RegExp|String: Replace pattern
-	replace: ', Bitch!',					// String: Replace result
-	before: false,							// Boolean: Replace before or after
+	pattern: /[\t\n.!?]+$/,					// RegExp|String: Replace pattern, e.g. /[^\w]+$/
+	replace: ', Bitch!',					// String: Replacement
+	before: false,							// Boolean: Insert before or after
 	active: false,							// Boolean: Render on page load
 	hash: 'bitch',							// String: Trigger bitchify via hashtag
 	keyword: 'bitch'						// String: Trigger bitchify on keypress
@@ -12,9 +10,6 @@ var defaults = {
 
 class Bitchify {
 
-	/**
-	 * @param {object} options
-	 */
 	constructor(options, callback) {
 		this.options = Object.assign({}, defaults, options);
 		this.active = this.options.active || false;
@@ -55,6 +50,8 @@ class Bitchify {
 		if (this.callback) {
 			this.callback();
 		}
+
+		return this;
 	}
 
 	/**
@@ -149,3 +146,5 @@ class Bitchify {
 	}
 
 }
+
+export default Bitchify;

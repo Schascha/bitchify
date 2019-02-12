@@ -27,14 +27,16 @@
     "url": "https://github.com/Schascha/bitchify/issues"
   },
   "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "autoprefixer": "^6.5.3",
-    "babel-cli": "^6.18.0",
-    "babel-preset-env": "^1.7.0",
     "eslint": "^5.10.0",
     "node-sass": "^3.13.0",
     "npm-run-all": "^4.1.5",
     "postcss-cli": "^2.6.0",
     "sass-lint": "^1.10.2",
-    "uglify-js": "^2.7.4"
+    "uglify-js": "^2.7.4",
+    "babel-plugin-transform-remove-export": "^1.0.0"
   }
 }
