@@ -1,6 +1,6 @@
 {
   "name": "bitchify",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Bitchify your panty pants",
   "homepage": "https://github.com/Schascha/bitchify",
   "main": "src/js/bitchify.js",
