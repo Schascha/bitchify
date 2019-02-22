@@ -1,5 +1,7 @@
 # Bitchify
 
+[![Travis Status](https://travis-ci.org/Schascha/bitchify.svg?branch=master)](https://travis-ci.org/Schascha/bitchify)
+
 Bitchify your panty pants. Just a lightweight dependency-free easter egg for every website, bitch!
 
 https://schascha.github.io/bitchify/
