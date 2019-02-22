@@ -56,7 +56,7 @@ describe('Bitchify', () => {
 		expect(bitchify.render().active).toBeTruthy();
 
 		// TODO: return itself?
-		expect(bitchify.render()).toBeFalsy();
+		expect(bitchify.render()).toBeUndefined();
 	});
 
 	it('should render on initialize, bitch!', () => {
@@ -74,5 +74,15 @@ describe('Bitchify', () => {
 	// 	window.location.hash = 'bitch';
 	// 	expect(bitchify.active).toBeTruthy();
 	// });
+
+	it('should trigger callback, bitch!', () => {
+		var x = 0;
+
+		new Bitchify({}, function() {
+			x++;
+		}).render();
+
+		expect(x).toBe(1);
+	});
 
 });
