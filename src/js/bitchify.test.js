@@ -67,13 +67,24 @@ describe('Bitchify', () => {
 		expect(bitchify.active).toBeTruthy();
 	});
 
-	// it('should render on hash change, bitch!', () => {
-	// 	const bitchify = new Bitchify();
-	//
-	// 	expect(bitchify.active).toBeFalsy();
-	// 	window.location.hash = 'bitch';
-	// 	expect(bitchify.active).toBeTruthy();
-	// });
+	it('should render on hash change, bitch!', () => {
+		const
+			bitchify = new Bitchify(),
+			event = document.createEvent('HashChangeEvent')
+		;
+
+		expect(bitchify.active).toBeFalsy();
+		expect(bitchify.options.hash).toBe('bitch');
+		event.initEvent('hashchange');
+
+		window.location.hash = 'foo';
+		window.dispatchEvent(event);
+		expect(bitchify.active).toBeFalsy();
+
+		window.location.hash = 'bitch';
+		window.dispatchEvent(event);
+		expect(bitchify.active).toBeTruthy();
+	});
 
 	it('should trigger callback, bitch!', () => {
 		var x = 0;
