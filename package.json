@@ -7,9 +7,9 @@
   "scripts": {
     "scss": "node-sass --output-style compressed -o dist/css src/scss",
     "postcss": "postcss -u autoprefixer -r dist/css/*",
-    "babel": "babel src/js/bitchify.js -o dist/js/bitchify.js",
+    "babel": "cross-env NODE_ENV=production babel src/js/bitchify.js -o dist/js/bitchify.js",
     "uglify": "uglifyjs dist/js/bitchify.js -m -o dist/js/bitchify.min.js",
-    "build": "npm test && cross-env NODE_ENV=production run-s scss postcss babel uglify",
+    "build": "npm test && run-s scss postcss babel uglify",
     "dev": "run-p \"scss -- -w\" \"babel -- -w\"",
     "test": "eslint src/js/*.js && jest src/js --coverage --verbose && sass-lint \"src/scss/**/*.scss\" -v -q"
   },
