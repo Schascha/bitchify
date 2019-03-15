@@ -9,7 +9,7 @@
     "postcss": "postcss -u autoprefixer -r dist/css/*",
     "babel": "babel src/js/bitchify.js -o dist/js/bitchify.js",
     "uglify": "uglifyjs dist/js/bitchify.js -m -o dist/js/bitchify.min.js",
-    "build": "npm test && NODE_ENV=production run-s scss postcss babel uglify",
+    "build": "npm test && cross-env NODE_ENV=production run-s scss postcss babel uglify",
     "dev": "run-p \"scss -- -w\" \"babel -- -w\"",
     "test": "eslint src/js/*.js && jest src/js --coverage --verbose && sass-lint \"src/scss/**/*.scss\" -v -q"
   },
@@ -32,6 +32,7 @@
     "@babel/preset-env": "^7.3.1",
     "autoprefixer": "^6.5.3",
     "babel-plugin-transform-remove-export": "^1.0.0",
+    "cross-env": "^5.2.0",
     "eslint": "^5.10.0",
     "eslint-plugin-jest": "^22.2.2",
     "jest": "^24.1.0",

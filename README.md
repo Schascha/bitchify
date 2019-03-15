@@ -36,6 +36,18 @@ hash: 'bitch',                          // String: Trigger bitchify via hashtag
 keyword: 'bitch'                        // String: Trigger bitchify on keypress
 ```
 
+## Examples
+
+### Insert at the beginning
+
+```javascript
+new Bitchify({
+	pattern: /[^\w]+$/,
+	replace: 'Bitch! ',
+	before: true
+}
+```
+
 ## License
 
 [MIT](./LICENSE)

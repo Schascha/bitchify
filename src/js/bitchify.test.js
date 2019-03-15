@@ -54,8 +54,6 @@ describe('Bitchify', () => {
 		const bitchify = new Bitchify();
 
 		expect(bitchify.render().active).toBeTruthy();
-
-		// TODO: return itself?
 		expect(bitchify.render()).toBeUndefined();
 	});
 
