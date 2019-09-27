@@ -8,7 +8,7 @@ https://schascha.github.io/bitchify/
 
 ## Installation
 
-Bitchify is available on [NPM](https://www.npmjs.com/package/bitchify):
+Bitchify is available on [npm](https://www.npmjs.com/package/bitchify):
 
 ```bash
 npm i bitchify --save
