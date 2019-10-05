@@ -2,7 +2,7 @@
   "name": "bitchify",
   "version": "1.0.3",
   "description": "Bitchify your panty pants",
-  "homepage": "https://github.com/Schascha/bitchify",
+  "homepage": "https://schascha.github.io/bitchify/",
   "main": "src/js/bitchify.js",
   "scripts": {
     "scss": "node-sass --output-style compressed -o dist/css src/scss",
@@ -15,7 +15,8 @@
   },
   "keywords": [
     "javascript",
-    "es6"
+    "es6",
+    "easter-egg"
   ],
   "author": "Sascha Künstler <contact.schascha@gmail.com> (http://www.schaschaweb.de)",
   "repository": {
