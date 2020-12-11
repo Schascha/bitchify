@@ -71,7 +71,6 @@ describe('Bitchify', () => {
 			event = document.createEvent('HashChangeEvent')
 		;
 
-		expect(bitchify.active).toBeFalsy();
 		expect(bitchify.options.hash).toBe('bitch');
 		event.initEvent('hashchange');
 
@@ -82,6 +81,18 @@ describe('Bitchify', () => {
 		window.location.hash = 'bitch';
 		window.dispatchEvent(event);
 		expect(bitchify.active).toBeTruthy();
+	});
+
+	it('should render on keypress, bitch!', () => {
+		const
+			bitchify = new Bitchify(),
+			event = document.createEvent('KeyboardEvent')
+		;
+
+		expect(bitchify.options.keyword).toBe('bitch');
+		event.initEvent('keypress');
+
+		window.dispatchEvent(event);
 	});
 
 	it('should trigger callback, bitch!', () => {

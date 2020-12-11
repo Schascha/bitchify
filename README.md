@@ -1,8 +1,8 @@
 # Bitchify
 
-[![Travis Status](https://travis-ci.org/Schascha/bitchify.svg?branch=master)](https://travis-ci.org/Schascha/bitchify)
+![Build](https://github.com/Schascha/bitchify/workflows/Build/badge.svg)
 
-Bitchify your panty pants. Just a lightweight dependency-free easter egg for every website, bitch!
+> Bitchify your panty pants. Just a lightweight dependency-free easter egg for every website, bitch!
 
 https://schascha.github.io/bitchify/
 
@@ -48,6 +48,50 @@ new Bitchify({
 }
 ```
 
+## Bitchify the world as Browser Bookmark
+
+Create bowser bookmark and copy following code as URL:
+
+```html
+javascript:var s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {new Bitchify().render();};document.body.appendChild(s);
+```
+
+## Development
+
+### Project setup
+
+```
+npm install
+```
+
+### Compiles for development
+
+```
+npm start
+```
+
+### Compiles and minifies for production
+
+```
+npm run build
+```
+
+### Test, lints and fixes files
+
+```
+npm test
+```
+
+## Bugs?
+
+Please let me know: https://github.com/Schascha/bitchify/issues
+
+## :coffee: Buy me a Coffee
+
+Support this project and [others](https://github.com/Schascha?tab=repositories) via [PayPal](https://www.paypal.me/LosZahlos). Thanks
+
 ## License
 
 [MIT](./LICENSE)
+
+Copyright (c) 2019 Sascha Künstler

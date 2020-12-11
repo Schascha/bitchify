@@ -9,6 +9,12 @@ $color-black: #000;
 
 html {
 	box-sizing: border-box;
+	color: $base-color;
+	font-family: 'Lora', serif;
+	font-size: 18px;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.5;
 }
 
 * {
@@ -22,13 +28,6 @@ html {
 	&::after {
 		box-sizing: inherit;
 	}
-}
-
-html {
-	color: $base-color;
-	font-family: 'Lora', serif;
-	font-size: 18px;
-	line-height: 1.5;
 }
 
 /* ------------------------------------
@@ -65,12 +64,12 @@ a {
    LAYOUT
    ------------------------------------ */
 
-.head {
-	box-shadow: 0 1px 2px rgba($color-black, .1);
+header {
+	box-shadow: 0 1px 2px rgba($color-black, 0.1);
 	text-align: center;
 
 	p {
-		font-size: .75rem;
+		font-size: 0.75rem;
 		margin: 1rem 0;
 	}
 
@@ -83,10 +82,19 @@ a {
 	}
 }
 
+footer {
+	padding: 1rem 1.5rem 3rem;
+	text-align: center;
+}
+
 .container {
 	margin: 0 auto;
 	max-width: 45em;
 	padding: 3em 1.5em;
+
+	> *:last-child {
+		margin-bottom: 0;
+	}
 }
 
 .button {
@@ -103,16 +111,14 @@ a {
 	padding: 0 2em;
 	text-align: center;
 	text-decoration: none;
-	transition: all .2s;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+	transition: all 0.2s ease-out;
 
 	&:hover {
 		background: lighten($base-color, 20%);
 	}
 
 	&:active {
-		transform: scale(.95);
+		transform: scale(0.95);
 	}
 
 	&:disabled {
