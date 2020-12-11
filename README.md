@@ -48,14 +48,6 @@ new Bitchify({
 }
 ```
 
-## Bitchify the world as Browser Bookmark
-
-Create bowser bookmark and copy following code as URL:
-
-```html
-javascript:var s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {new Bitchify().render();};document.body.appendChild(s);
-```
-
 ## Development
 
 ### Project setup
@@ -80,6 +72,14 @@ npm run build
 
 ```
 npm test
+```
+
+## Bitchify the world as Browser Bookmark
+
+Create bowser bookmark and copy following code as URL:
+
+```html
+javascript:var s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {new Bitchify().render();};document.body.appendChild(s);
 ```
 
 ## Bugs?
