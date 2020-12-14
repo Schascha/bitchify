@@ -86,7 +86,7 @@ javascript:var s=document.createElement('script');s.src='https://schascha.github
 
 Please let me know: https://github.com/Schascha/bitchify/issues
 
-## :coffee: Buy me a Coffee
+## Buy me a Coffee :coffee:
 
 Support this project and [others](https://github.com/Schascha?tab=repositories) via [PayPal](https://www.paypal.me/LosZahlos). Thanks
 

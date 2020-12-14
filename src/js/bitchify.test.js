@@ -13,6 +13,7 @@ describe('Bitchify', () => {
 
 	afterEach(() => {
 		document.body.innerHTML = '';
+		window.location.hash = '';
 	});
 
 	it('should render, bitch!', () => {
@@ -34,7 +35,9 @@ describe('Bitchify', () => {
 			options = {
 				elements: 'h1',
 				pattern: 'foo',
-				replace: 'bar'
+				replace: 'bar',
+				hash: null,
+				keyword: ''
 			},
 			bitchify = new Bitchify(options).render()
 		;
@@ -42,6 +45,8 @@ describe('Bitchify', () => {
 		expect(bitchify.options.elements).toBe(options.elements);
 		expect(bitchify.options.pattern).toBe(options.pattern);
 		expect(bitchify.options.replace).toBe(options.replace);
+		expect(bitchify.options.hash).toBe(options.hash);
+		expect(bitchify.options.keyword).toBe(options.keyword);
 	});
 
 	it('should return itself on render, bitch!', () => {
@@ -85,14 +90,26 @@ describe('Bitchify', () => {
 
 	it('should render on keypress, bitch!', () => {
 		const
-			bitchify = new Bitchify(),
-			event = document.createEvent('KeyboardEvent')
+			bitchify = new Bitchify()
 		;
 
+		// Should use defaults
 		expect(bitchify.options.keyword).toBe('bitch');
-		event.initEvent('keypress');
+		expect(bitchify.keylog.length).toBe(0);
 
-		window.dispatchEvent(event);
+		// Should add key to keylog
+		document.dispatchEvent(new KeyboardEvent('keypress', {'key': 'b'}));
+		expect(bitchify.keylog.length).toBe(1);
+
+		// Should shift keylog array
+		bitchify.keylog = ['a', 'b', 'c', 'd', 'e'];
+		document.dispatchEvent(new KeyboardEvent('keypress', {'key': 'f'}));
+		expect(bitchify.keylog.length).toBe(5);
+
+		// Should render
+		bitchify.keylog = ['b', 'i', 't', 'c'];
+		document.dispatchEvent(new KeyboardEvent('keypress', {'key': 'h'}));
+		expect(bitchify.active).toBeTruthy();
 	});
 
 	it('should trigger callback, bitch!', () => {
@@ -103,6 +120,23 @@ describe('Bitchify', () => {
 		}).render();
 
 		expect(x).toBe(1);
+	});
+
+	it('should insert before, bitch!', () => {
+		document.body.innerHTML = __fixture();
+
+		const
+			bitchify = new Bitchify({
+				before: true,
+				pattern: /[^\w]+$/,
+				replace: 'Bitch! '
+			}),
+			re = new RegExp(bitchify.options.replace, 'g')
+		;
+
+		bitchify.render();
+		expect(bitchify.active).toBeTruthy();
+		expect((document.body.innerHTML.match(re) || []).length).toBe(2);
 	});
 
 });
