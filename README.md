@@ -79,7 +79,7 @@ npm test
 Create bowser bookmark and copy following code as URL:
 
 ```html
-javascript:var s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {new Bitchify().render();};document.body.appendChild(s);
+javascript:if(typeof bitchify==='undefined'){var bitchify,s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {bitchify=new Bitchify().render();};document.body.appendChild(s);}else{bitchify.render();}
 ```
 
 ## Bugs?
