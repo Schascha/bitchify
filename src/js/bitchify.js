@@ -38,7 +38,7 @@ class Bitchify {
 
 		const matches = document.querySelectorAll(this.options.elements);
 
-		for (let value of matches) {
+		for (const value of matches) {
 			value.innerHTML = this._replace(value.innerHTML);
 		}
 
