@@ -1,6 +1,7 @@
 # Bitchify
 
-![Build](https://github.com/Schascha/bitchify/workflows/Build/badge.svg)
+[![Build](https://github.com/Schascha/bitchify/workflows/Build/badge.svg)](https://github.com/Schascha/bitchify/actions)
+[![npm](https://img.shields.io/npm/v/bitchify)](https://www.npmjs.com/package/bitchify)
 
 > Bitchify your panty pants. Just a lightweight dependency-free easter egg for every website, bitch!
 
@@ -82,7 +83,7 @@ Create bowser bookmark and copy following code as URL:
 javascript:if(typeof bitchify==='undefined'){var bitchify,s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {bitchify=new Bitchify().render();};document.body.appendChild(s);}else{bitchify.render();}
 ```
 
-## Bugs?
+## Bugs? :bug:
 
 Please let me know: https://github.com/Schascha/bitchify/issues
 
