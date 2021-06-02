@@ -91,6 +91,10 @@ Please let me know: https://github.com/Schascha/bitchify/issues
 
 Support this project and [others](https://github.com/Schascha?tab=repositories) via [PayPal](https://www.paypal.me/LosZahlos). Thanks
 
+## Changelog
+
+Detailed changes for each release are documented in the [release notes](https://github.com/Schascha/bitchify/releases).
+
 ## License
 
 [MIT](./LICENSE)
