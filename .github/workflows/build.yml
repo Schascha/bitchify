@@ -23,6 +23,12 @@ jobs:
           npm test
           npm run build
 
+      - name: Publish 🚀
+        if: startsWith(github.ref, 'refs/tags/')
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
+
   release:
     if: startsWith(github.ref, 'refs/tags/')
     needs: build
@@ -43,8 +49,3 @@ jobs:
           body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish 🚀
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NODE_AUTH_TOKEN}}
