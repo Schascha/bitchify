@@ -2,6 +2,7 @@
 
 [![Build](https://github.com/Schascha/bitchify/workflows/Build/badge.svg)](https://github.com/Schascha/bitchify/actions)
 [![npm](https://img.shields.io/npm/v/bitchify)](https://www.npmjs.com/package/bitchify)
+[![install size](https://packagephobia.com/badge?p=bitchify)](https://packagephobia.com/result?p=bitchify)
 
 > Bitchify your panty pants. Just a lightweight dependency-free easter egg for every website, bitch!
 
