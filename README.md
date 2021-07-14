@@ -84,11 +84,11 @@ Create bowser bookmark and copy following code as URL:
 javascript:if(typeof bitchify==='undefined'){var bitchify,s=document.createElement('script');s.src='https://schascha.github.io/bitchify/dist/js/bitchify.js';s.onload=function() {bitchify=new Bitchify().render();};document.body.appendChild(s);}else{bitchify.render();}
 ```
 
-## Bugs? :bug:
+## Bugs? 🐛
 
 Please let me know: https://github.com/Schascha/bitchify/issues
 
-## Buy me a Coffee :coffee:
+## Buy me a Coffee ☕
 
 Support this project and [others](https://github.com/Schascha?tab=repositories) via [PayPal](https://www.paypal.me/LosZahlos). Thanks
 
