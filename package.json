@@ -32,7 +32,7 @@
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
-    "@schascha/eslint-config": "^0.0.3",
+    "@schascha/eslint-config": "^0.1.0",
     "@schascha/stylelint-config": "^0.0.7",
     "babel-plugin-transform-remove-export": "^1.0.0",
     "cssnano": "^5.0.2",
