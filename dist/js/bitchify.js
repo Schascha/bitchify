@@ -15,7 +15,6 @@ const defaults = {
   // String: Trigger bitchify via hashtag
   keyword: 'bitch' // String: Trigger bitchify on keypress
 };
-
 class Bitchify {
   constructor(options, callback) {
     this.options = Object.assign({}, defaults, options);
