@@ -33,7 +33,7 @@
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
     "@schascha/eslint-config": "^0.2.1",
-    "@schascha/stylelint-config": "^0.0.7",
+    "@schascha/stylelint-config": "^1.0.0",
     "babel-plugin-transform-remove-export": "^1.0.0",
     "cssnano": "^6.0.1",
     "eslint": "^8.52.0",
@@ -46,7 +46,7 @@
     "postcss-preset-env": "^9.3.0",
     "postcss-scss": "^4.0.6",
     "sass": "^1.32.12",
-    "stylelint": "^14.16.0",
+    "stylelint": "^16.2.1",
     "uglify-js": "^3.13.6"
   },
   "files": [
