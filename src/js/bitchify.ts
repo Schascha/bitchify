@@ -1,24 +1,39 @@
-const defaults = {
-	elements: 'h1, h2, h3, h4, h5, h6, p',  // String: Selector
-	pattern: /[\t\n.!?]+$/,                 // RegExp|String: Replace pattern, e.g. /[^\w]+$/
-	replace: ', Bitch!',                    // String: Replacement
-	before: false,                          // Boolean: Insert before or after
-	active: false,                          // Boolean: Render on page load
-	hash: 'bitch',                          // String: Trigger bitchify via hashtag
-	keyword: 'bitch'                        // String: Trigger bitchify on keypress
+interface IBitchifyOptions {
+	elements: string;
+	pattern: RegExp | string;
+	replace: string;
+	before: boolean;
+	active: boolean;
+	hash: string | null;
+	keyword: string;
+}
+
+const defaults: IBitchifyOptions = {
+	elements: 'h1, h2, h3, h4, h5, h6, p', // String: Selector
+	pattern: /[\t\n.!?]+$/, // RegExp|String: Replace pattern, e.g. /[^\w]+$/
+	replace: ', Bitch!', // String: Replacement
+	before: false, // Boolean: Insert before or after
+	active: false, // Boolean: Render on page load
+	hash: 'bitch', // String: Trigger bitchify via hashtag
+	keyword: 'bitch', // String: Trigger bitchify on keypress
 };
 
 class Bitchify {
+	active: boolean;
+	options: IBitchifyOptions;
+	keylog!: string[];
+	keyword!: string;
+	callback!: () => void;
 
-	constructor(options, callback) {
-		this.options = Object.assign({}, defaults, options);
-		this.active = this.options.active || false;
+	constructor(options?: Partial<IBitchifyOptions>, callback?: () => void) {
+		this.options = { ...defaults, ...options };
+		this.active = this._isHash() || this.options.active;
 
 		if (callback && typeof callback === 'function') {
 			this.callback = callback;
 		}
 
-		if (this.active || this._isHash()) {
+		if (this.active) {
 			this.render();
 		} else {
 			this._addKeypress();
@@ -42,7 +57,7 @@ class Bitchify {
 			value.innerHTML = this._replace(value.innerHTML);
 		}
 
-		// Remove event listener
+		// Remove event listeners
 		document.removeEventListener('keypress', this._onKeypress);
 		window.removeEventListener('hashchange', this._onHashchange);
 
@@ -56,31 +71,35 @@ class Bitchify {
 
 	/**
 	 * Returns replace string
-	 * @param {string} str
-	 * @returns {*}
+	 * @param {string} str - String to replace
+	 * @returns {string} - Replaced string
 	 * @private
 	 */
-	_replace(str) {
-		str = str.trim().replace(this.options.pattern, '');
-
-		return (this.options.before) ? this.options.replace + str : str + this.options.replace;
+	_replace(str: string): string {
+		const { before, pattern, replace } = this.options;
+		str = str.trim().replace(pattern, '');
+		return before ? replace + str : str + replace;
 	}
 
 	/**
 	 * Return true if options.hash is equal to window.location.hash
-	 * @returns {boolean}
+	 * @returns {boolean} - True if hash is equal
 	 * @private
 	 */
-	_isHash() {
-		return (this.options.hash && this._stripHash(window.location.hash) === this._stripHash(this.options.hash));
+	_isHash(): boolean {
+		const { hash } = this.options;
+		return (
+			!!hash && this._stripHash(window.location.hash) === this._stripHash(hash)
+		);
 	}
 
 	/**
 	 * Removes hashtag
-	 * @returns {string}
+	 * @param {string} str - String with hashtag
+	 * @returns {string} - String without hashtag
 	 * @private
 	 */
-	_stripHash(str) {
+	_stripHash(str: string): string {
 		return str.replace(/^#/, '');
 	}
 
@@ -98,7 +117,7 @@ class Bitchify {
 	}
 
 	/**
-	 * Enabel hashchange event listener
+	 * Enable hashchange event listener
 	 * @private
 	 */
 	_addHashchange() {
@@ -110,26 +129,26 @@ class Bitchify {
 
 	/**
 	 * Returns true if keylog is equal to keyword
-	 * @param {string} key
-	 * @returns {boolean}
+	 * @param {string} key - Key pressed
+	 * @returns {boolean} - True if keylog is equal to keyword
 	 * @private
 	 */
-	_validateKey(key) {
+	_validateKey(key: string): boolean {
 		this.keylog.push(key);
 
 		if (this.keylog.length > this.keyword.length) {
 			this.keylog.shift();
 		}
 
-		return (this.keylog.join('') === this.keyword);
+		return this.keylog.join('') === this.keyword;
 	}
 
 	/**
 	 * Keypress event handler
-	 * @param {object} event
+	 * @param {object} event - Keypress event
 	 * @private
 	 */
-	_onKeypress(event) {
+	_onKeypress(event: { key: string }) {
 		if (this._validateKey(event.key)) {
 			this.render();
 		}
@@ -144,7 +163,6 @@ class Bitchify {
 			this.render();
 		}
 	}
-
 }
 
 export default Bitchify;

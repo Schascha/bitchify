@@ -18,22 +18,24 @@
   "bugs": {
     "url": "https://github.com/Schascha/bitchify/issues"
   },
-  "main": "src/js/bitchify.js",
+  "main": "src/js/bitchify.ts",
   "scripts": {
     "scss": "sass --style compressed src/scss:dist/css",
     "postcss": "postcss -r dist/css/*.css",
-    "babel": "babel src/js/bitchify.js -o dist/js/bitchify.js --plugins transform-remove-export",
+    "babel": "babel src/js/bitchify.ts -o dist/js/bitchify.js --plugins transform-remove-export",
     "uglify": "uglifyjs dist/js/bitchify.js -m -o dist/js/bitchify.min.js",
     "build": "run-s scss postcss babel uglify",
-    "start": "run-p \"scss -- -w\" \"babel -- -w\"",
-    "test": "eslint src/js/*.js && jest src/js --coverage --verbose && stylelint \"./src/**/*.scss\""
+    "start": "run-p \"scss -- -w\" \"babel -- -w --extensions '.ts,.js'\"",
+    "test": "tsc --noEmit && eslint --ext .js,.ts && jest src/js src --coverage --verbose && stylelint \"./src/**/*.scss\""
   },
   "devDependencies": {
     "@babel/cli": "^7.13.16",
     "@babel/core": "^7.14.0",
     "@babel/preset-env": "^7.14.1",
+    "@babel/preset-typescript": "^7.24.7",
     "@schascha/eslint-config": "^0.3.0",
     "@schascha/stylelint-config": "^1.0.0",
+    "@types/jest": "^29.5.12",
     "babel-plugin-transform-remove-export": "^1.0.0",
     "cssnano": "^7.0.1",
     "eslint": "^8.52.0",
