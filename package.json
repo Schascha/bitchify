@@ -22,8 +22,8 @@
   "scripts": {
     "scss": "sass --style compressed src/scss:dist/css",
     "postcss": "postcss -r dist/css/*.css",
-    "babel": "babel src/js/bitchify.ts -o dist/js/bitchify.js --plugins transform-remove-export",
-    "uglify": "uglifyjs dist/js/bitchify.js -m -o dist/js/bitchify.min.js",
+    "babel": "babel src/js/bitchify.ts -o dist/js/bitchify.browser.js --plugins transform-remove-export && babel src/js/bitchify.ts -o dist/js/bitchify.js",
+    "uglify": "uglifyjs dist/js/bitchify.browser.js -m -o dist/js/bitchify.min.js",
     "build": "run-s scss postcss babel uglify",
     "start": "run-p \"scss -- -w\" \"babel -- -w --extensions '.ts,.js'\"",
     "test": "tsc --noEmit && eslint --ext .js,.ts && jest src/js src --coverage --verbose && stylelint \"./src/**/*.scss\""
