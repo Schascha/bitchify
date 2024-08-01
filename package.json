@@ -38,7 +38,7 @@
     "@types/jest": "^29.5.12",
     "babel-plugin-transform-remove-export": "^1.0.0",
     "cssnano": "^7.0.1",
-    "eslint": "^8.52.0",
+    "eslint": "^9.8.0",
     "eslint-plugin-jest": "^28.5.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
